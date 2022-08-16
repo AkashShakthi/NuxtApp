@@ -13,16 +13,13 @@
                     <th scope="col">Name</th>
                    <th scope="col">Price</th>
                     <th scope="col">Status</th>
-                 </tr>
+                  </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="task in tasks" >
-
-
+                  <tr v-for="task in tasks">
                     <td scope="row">{{ task.id }}</td>
                     <td>{{ task.name }}</td>
-
-                   <td>{{ task.price }}</td>
+                    <td>{{ task.price }}</td>
                     <td>
                       <span v-if="task.status == 0"  class="badge bg-warning">Inactive</span>
                      <span v-else  class="badge bg-success">Active</span>
@@ -38,35 +35,22 @@
 <script>
 export default {
   name: 'home',
-  layout: 'dashboard',
   data(){
     return{
-      task:[],
+      tasks:[],
     }
   },
   methods: {
     getTasks(){
       this.$axios.get('http://127.0.0.1:8000/api/tasks').then(response =>{
-        console.log(response);
-        this.tasks = response.data;
-      });
-    },
-
-     getImgtasks(){
-      this.$axios.get('http://127.0.0.1:8000/api/imgtasks').then(response =>{
-
-        this.imgtasks = response.data[0];
-        let vdata = response.data;
-       consple.log(vdata)
-
-
+      this.tasks = response.data;
+         console.log(response);
       });
     },
   },
-   mounted(){
+  mounted(){
     this.getTasks();
-     this.getImgtasks();
-  },
+  }
 }
 </script>
 
